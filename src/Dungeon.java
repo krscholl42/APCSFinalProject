@@ -44,7 +44,16 @@ public class Dungeon {
 			return true;
 		if(r != 0 && c!= 0 && spaces[r-1][c-1] instanceof RoomSpace)
 			return true;
-		if(r != width-1 && spaces[])
+		if(r != width-1 && spaces[r+1][c] instanceof RoomSpace)
+			return true;
+		if(c != height-1 && spaces[r][c+1] instanceof RoomSpace)
+			return true;
+		if(r != 0 && c != height-1 && spaces[r-1][c+1] instanceof RoomSpace)
+			return true;
+		if(r != width-1 && c!= 0 && spaces[r+1][c-1] instanceof RoomSpace)
+			return true;
+		if(r != width-1 && c != height-1 && spaces[r+1][c+1] instanceof RoomSpace)
+			return true;
 		
 		return false;
 	}
