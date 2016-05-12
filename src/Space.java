@@ -14,5 +14,7 @@ public abstract class Space {
 	public boolean getIsFull(){
 		return isFull;
 	}
+	
+	public abstract boolean add(Character thing);
 
 }

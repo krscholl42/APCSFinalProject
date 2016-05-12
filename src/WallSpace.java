@@ -6,4 +6,10 @@ public class WallSpace extends Space {
 		isFull = true;
 	}
 
+	@Override
+	public boolean add(Character thing) {
+
+		return false;
+	}
+
 }

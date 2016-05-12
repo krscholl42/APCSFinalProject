@@ -6,4 +6,11 @@ public class EmptySpace extends Space {
 		isFull = true;
 	}
 
+	@Override
+	public boolean add(Character thing) {
+		//returns false is isFull = true
+		return false;
+		
+	}
+
 }

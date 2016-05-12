@@ -57,5 +57,16 @@ public class Dungeon {
 		
 		return false;
 	}
+	
+	private void addItems(int numItems){
+		while(numItems > 0){
+			int r = (int)(Math.random()*width);
+			int c = (int)(Math.random()*height);
+			if(spaces[r][c] instanceof RoomSpace){
+				numItems --;
+				spaces[r][c].add(new Items(r,c));
+			}
+		}
+	}
 
 }
