@@ -1,2 +1,11 @@
- DevLog Day 1:
+ DevLog 
  
+ Day1:
+ -built fundamental templates for all classes
+ -added init methods to dungeon class
+ -created a method to add character items to room items
+ 
+ TODO: 
+ -continue to add base methods to all classes
+ -start working on the Player class
+ -continue on getting different types of classes (dungeon, space, character) to work together in a cohesive manner

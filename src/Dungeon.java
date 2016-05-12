@@ -3,6 +3,7 @@ public class Dungeon {
 	protected Space[][] spaces;
 	private final int width = 100;
 	private final int height = 100;
+	private final int ITEM_HEALTH = 1;
 	
 	public Dungeon(){
 		spaces = new Space[width][height];
@@ -64,7 +65,7 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numItems --;
-				spaces[r][c].add(new Items(r,c));
+				spaces[r][c].add(new Items(ITEM_HEALTH,r,c));
 			}
 		}
 	}
