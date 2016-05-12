@@ -4,7 +4,7 @@
 public class RoomSpace extends Space {
 	
 	public RoomSpace(int r, int c){
-		
+		super(r,c);
 	}
 
 }
