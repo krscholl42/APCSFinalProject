@@ -10,6 +10,7 @@ public class Dungeon {
 	private final int height = 100;
 	private final int ITEM_HEALTH = 1;
 	private final int MONSTER_HEALTH = 50;
+	private final int PLAYER_HEALTH = 100;
 	private final int INIT_ITEMS = 15;
 	private final int INIT_MONSTERS = 25;
 	
@@ -95,8 +96,15 @@ public class Dungeon {
 	}
 	
 	public void placePlayer(int r, int c){
-		if(spaces[r][c].getIsFull())
-			spaces[r][c].remove();
+		if(spaces[r][c] instanceof RoomSpace){
+			if(spaces[r][c].getIsFull()){
+				Character thing = ((RoomSpace) spaces[r][c]).getFirstThing();
+				((RoomSpace) spaces[r][c]).remove(thing);
+			}
+			spaces[r][c].add(new Player(PLAYER_ID, PLAYER_HEALTH, r, c));
+		}
+		
+			
 	}
 	
 	public Space[][] getGrid(){

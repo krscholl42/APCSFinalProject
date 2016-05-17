@@ -18,6 +18,10 @@ public class RoomSpace extends Space{
 		return isFull;
 	}
 	
+	public Character getFirstThing(){
+		return contains[0];
+	}
+	
 	public boolean add(Character thing){
 		if(isFull == false){
 			contains[index] = thing;
@@ -31,8 +35,11 @@ public class RoomSpace extends Space{
 	public boolean remove(Character thing){
 		for(int i = 0; i < contains.length; i++){
 			if(contains[i].equals(thing)){
-				
+				contains[i] = null;
+				return true;
+			}
 		}
+		return false;
 	}
 
 }
