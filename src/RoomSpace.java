@@ -27,5 +27,11 @@ public class RoomSpace extends Space {
 		}else
 			return false;
 	}
+	
+	public boolean remove(Character thing){
+		for(int i = 0; i < contains.length; i++){
+			if(contains[i] )
+		}
+	}
 
 }

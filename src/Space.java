@@ -16,5 +16,7 @@ public abstract class Space {
 	}
 	
 	public abstract boolean add(Character thing);
+	
+	
 
 }

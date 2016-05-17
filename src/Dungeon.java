@@ -1,12 +1,19 @@
 
 public class Dungeon {
 	protected Space[][] spaces;
+	protected int player_r;
+	protected int player_c;
 	private final int width = 100;
 	private final int height = 100;
 	private final int ITEM_HEALTH = 1;
+	private final int MONSTER_HEALTH = 50;
+	private final int INIT_ITEMS = 15;
+	private final int INIT_MONSTERS = 25;
 	
-	public Dungeon(){
+	public Dungeon(int playerR, int playerC){
 		spaces = new Space[width][height];
+		player_r = playerR;
+		player_c = playerC;
 	}
 	
 	public void buildDungeon(){
@@ -21,6 +28,9 @@ public class Dungeon {
 			spaces[r][c] = new RoomSpace(r,c);
 		}
 		fillRest();
+		addItems(INIT_ITEMS);
+		addMonsters(INIT_MONSTERS);
+		placePlayer(player_r, player_c);
 	}
 
 	private void fillRest() {
@@ -68,6 +78,26 @@ public class Dungeon {
 				spaces[r][c].add(new Items(ITEM_HEALTH,r,c));
 			}
 		}
+	}
+	
+	private void addMonsters(int numMons){
+		while(numMons > 0){
+			int r = (int)(Math.random()*width);
+			int c = (int)(Math.random()*height);
+			if(spaces[r][c] instanceof RoomSpace){
+				numMons --;
+				spaces[r][c].add(new Monster(MONSTER_HEALTH,r,c));
+			}
+		}
+	}
+	
+	public void placePlayer(int r, int c){
+		if(spaces[r][c].getIsFull())
+			spaces[r][c].remove();
+	}
+	
+	public Space[][] getGrid(){
+		return spaces;
 	}
 
 }
