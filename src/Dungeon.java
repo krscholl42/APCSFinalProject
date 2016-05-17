@@ -110,5 +110,13 @@ public class Dungeon {
 	public Space[][] getGrid(){
 		return spaces;
 	}
+	
+	public int getWidth(){
+		return width;
+	}
+	
+	public int getHeight(){
+		return height;
+	}
 
 }

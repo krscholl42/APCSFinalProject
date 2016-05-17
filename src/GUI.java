@@ -3,10 +3,12 @@ import processing.core.*;
 public class GUI extends PApplet {
 	int c;
 	Display display;
+	Dungeon dun;
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
 
+		dun = new Dungeon(75,75);
 		// Create a simulator
 
 		// Create the display
@@ -24,14 +26,15 @@ public class GUI extends PApplet {
 		display.setColor(EmptySpace.class, color(0,0,0));
 		display.setColor(Space.class, color(255,255,255));
 
-		display.setNumCols(100);
-		display.setNumRows(100);
+		display.setNumCols(dun.getWidth());
+		display.setNumRows(dun.getHeight());
 
 
 	}
 
 	@Override
 	public void draw() {
-		
+		background(200);
+		display.drawGrid(dun); // display the game
 	}
 }
