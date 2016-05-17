@@ -37,13 +37,14 @@ public class Dungeon {
 		placePlayer(player_r, player_c);
 	}
 
-	private void fillRest() {
+	public void fillRest() {
 		for(int r = 0; r < width; r++){
 			for(int c = 0; c < height; c++){
 				Space current = spaces[r][c];
 				if(current == null){
 					if(adjacentRoom(r, c)){
 						current = new WallSpace(r, c);
+						System.out.println("WALL!");
 					}else{
 						current = new EmptySpace(r, c);
 					}
@@ -84,7 +85,7 @@ public class Dungeon {
 		}
 	}
 	
-	private void addMonsters(int numMons){
+	public void addMonsters(int numMons){
 		while(numMons > 0){
 			int r = (int)(Math.random()*width);
 			int c = (int)(Math.random()*height);
