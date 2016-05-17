@@ -3,6 +3,9 @@ public class Dungeon {
 	protected Space[][] spaces;
 	protected int player_r;
 	protected int player_c;
+	public final int ITEM_ID = 1;
+	public final int PLAYER_ID = 0;
+	public final int MONSTER_ID = 2;
 	private final int width = 100;
 	private final int height = 100;
 	private final int ITEM_HEALTH = 1;
@@ -75,7 +78,7 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numItems --;
-				spaces[r][c].add(new Items(ITEM_HEALTH,r,c));
+				spaces[r][c].add(new Items(ITEM_ID, ITEM_HEALTH,r,c));
 			}
 		}
 	}
@@ -86,7 +89,7 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numMons --;
-				spaces[r][c].add(new Monster(MONSTER_HEALTH,r,c));
+				spaces[r][c].add(new Monster(MONSTER_ID, MONSTER_HEALTH,r,c));
 			}
 		}
 	}

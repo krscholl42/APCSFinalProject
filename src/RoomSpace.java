@@ -1,7 +1,7 @@
 /*
  * child of Space that designates places where Characters and Items can be placed. 
  */
-public class RoomSpace extends Space {
+public class RoomSpace extends Space{
 	private Character[] contains;
 	private int index;
 	
@@ -30,8 +30,13 @@ public class RoomSpace extends Space {
 	
 	public boolean remove(Character thing){
 		for(int i = 0; i < contains.length; i++){
-			if(contains[i] )
+			if(contains[i].equals(thing)){
+				
 		}
 	}
 
 }
+
+	
+
+	

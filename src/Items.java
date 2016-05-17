@@ -4,8 +4,14 @@
  */
 public class Items extends Character{
 	
-	public Items(int start, int r, int c){
-		super(start, r, c);
+	public Items(int charId, int start, int r, int c){
+		super(charId, start, r, c);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

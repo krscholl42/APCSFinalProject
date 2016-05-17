@@ -3,8 +3,14 @@
  */
 public class Player extends Character{
 	
-	public Player(int start, int r, int c){
-		super(start, r, c);
+	public Player(int charId, int start, int r, int c){
+		super(charId, start, r, c);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -2,7 +2,7 @@
  * what type of space each grid in the dungeon is. ex: RoomSpace, WallSpace, EmptySpace. 
  * Each Space grid will be able to hold one Character token and up to two Item tokens
  */
-public abstract class Space {
+public abstract class Space implements Comparable {
 	protected Location loc;
 	protected boolean isFull;
 	
@@ -16,6 +16,11 @@ public abstract class Space {
 	}
 	
 	public abstract boolean add(Character thing);
+	
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 

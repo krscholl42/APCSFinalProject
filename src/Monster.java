@@ -4,8 +4,8 @@
  */
 public class Monster extends Character{
 	
-	public Monster(int start, int r, int c){
-		super(start, r, c);
+	public Monster(int charId, int start, int r, int c){
+		super(charId, start, r, c);
 		
 	}
 
@@ -31,6 +31,13 @@ public class Monster extends Character{
 	public void death() {
 		
 		
+	}
+
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
