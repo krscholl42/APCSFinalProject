@@ -14,7 +14,17 @@ public class RoomSpace extends Space{
 	
 	public boolean isSpaceFull(){
 		// checks to see if there is one player, one monster, or two items in the space. If yes, returns true. Else, returns false
-		
+		int itemCount = 0;
+		isFull = false;
+		for(int i = 0; i < contains.length; i++){
+			if(contains[i] instanceof Monster || contains[i] instanceof Player)
+				isFull = true;
+			else if(contains[i] instanceof Items)
+				itemCount++;
+		}
+		if(itemCount >= 2)
+			isFull = true;
+	
 		return isFull;
 	}
 	
