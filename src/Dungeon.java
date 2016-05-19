@@ -48,6 +48,7 @@ public class Dungeon {
 					}else{
 						current = new EmptySpace(r, c);
 					}
+					spaces[r][c] = current;
 				}
 			}
 		}	

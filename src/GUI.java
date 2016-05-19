@@ -22,12 +22,12 @@ public class GUI extends PApplet {
 		//		display.setColor(2, color(0, 255, 0));
 
 		// You can use classes instead, for example:
-		display.setColor(RoomSpace.class, color(39, 243, 53));
+		display.setColor(RoomSpace.class, color(0, 0, 255));
 		display.setColor(WallSpace.class, color(247, 116, 59));
 		display.setColor(EmptySpace.class, color(0,0,0));
-		display.setColor(Space.class, color(255,255,255));
-		display.setColor(Player.class, color(32,32,54));
-		display.setColor(Items.class, color(150,51,210));
+		display.setColor(Space.class, color(87,123,243));
+		display.setColor(Player.class, color(0,32,0));
+		display.setColor(Items.class, color(0,0,20));
 
 		display.setNumCols(dun.getWidth());
 		display.setNumRows(dun.getHeight());
