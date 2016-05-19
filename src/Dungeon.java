@@ -1,12 +1,23 @@
 
 public class Dungeon {
 	protected Space[][] spaces;
+	protected int player_r;
+	protected int player_c;
+	public final int ITEM_ID = 1;
+	public final int PLAYER_ID = 0;
+	public final int MONSTER_ID = 2;
 	private final int width = 100;
 	private final int height = 100;
 	private final int ITEM_HEALTH = 1;
+	private final int MONSTER_HEALTH = 50;
+	private final int PLAYER_HEALTH = 100;
+	private final int INIT_ITEMS = 15;
+	private final int INIT_MONSTERS = 25;
 	
-	public Dungeon(){
+	public Dungeon(int playerR, int playerC){
 		spaces = new Space[width][height];
+		player_r = playerR;
+		player_c = playerC;
 	}
 	
 	public void buildDungeon(){
@@ -21,15 +32,19 @@ public class Dungeon {
 			spaces[r][c] = new RoomSpace(r,c);
 		}
 		fillRest();
+		addItems(INIT_ITEMS);
+		addMonsters(INIT_MONSTERS);
+		placePlayer(player_r, player_c);
 	}
 
-	private void fillRest() {
+	public void fillRest() {
 		for(int r = 0; r < width; r++){
 			for(int c = 0; c < height; c++){
 				Space current = spaces[r][c];
 				if(current == null){
 					if(adjacentRoom(r, c)){
 						current = new WallSpace(r, c);
+						System.out.println("WALL!");
 					}else{
 						current = new EmptySpace(r, c);
 					}
@@ -65,9 +80,44 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numItems --;
-				spaces[r][c].add(new Items(ITEM_HEALTH,r,c));
+				spaces[r][c].add(new Items(ITEM_ID, ITEM_HEALTH,r,c));
 			}
 		}
+	}
+	
+	public void addMonsters(int numMons){
+		while(numMons > 0){
+			int r = (int)(Math.random()*width);
+			int c = (int)(Math.random()*height);
+			if(spaces[r][c] instanceof RoomSpace){
+				numMons --;
+				spaces[r][c].add(new Monster(MONSTER_ID, MONSTER_HEALTH,r,c));
+			}
+		}
+	}
+	
+	public void placePlayer(int r, int c){
+		if(spaces[r][c] instanceof RoomSpace){
+			if(spaces[r][c].getIsFull()){
+				Character thing = ((RoomSpace) spaces[r][c]).getFirstThing();
+				((RoomSpace) spaces[r][c]).remove(thing);
+			}
+			spaces[r][c].add(new Player(PLAYER_ID, PLAYER_HEALTH, r, c));
+		}
+		
+			
+	}
+	
+	public Space[][] getGrid(){
+		return spaces;
+	}
+	
+	public int getWidth(){
+		return width;
+	}
+	
+	public int getHeight(){
+		return height;
 	}
 
 }
