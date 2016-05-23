@@ -44,7 +44,6 @@ public class Dungeon {
 				if(current == null){
 					if(adjacentRoom(r, c)){
 						current = new WallSpace(r, c);
-						System.out.println("WALL!");
 					}else{
 						current = new EmptySpace(r, c);
 					}

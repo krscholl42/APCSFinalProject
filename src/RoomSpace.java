@@ -32,6 +32,24 @@ public class RoomSpace extends Space{
 		return contains[0];
 	}
 	
+	public Character getMVT(){ //Most Valuable Thing (if only items, returns first thing)
+		boolean monster = false;
+		boolean item = false;
+		int index = 0;
+		for(int i = 0; i < contains.length; i++){
+			if(contains[i] instanceof Player)
+				return contains[i];
+			if(contains[i] instanceof Monster){
+				monster = true;
+				index = i;
+			}
+		}
+		if(monster == true)
+			return contains[index];
+		return contains[0];
+		
+	}
+	
 	public boolean add(Character thing){
 		if(isFull == false){
 			contains[index] = thing;

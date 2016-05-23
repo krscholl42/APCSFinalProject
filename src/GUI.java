@@ -7,7 +7,7 @@ public class GUI extends PApplet {
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
-
+ 
 		dun = new Dungeon(75,75);
 		dun.buildDungeon();
 		// Create a simulator
