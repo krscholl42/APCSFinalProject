@@ -1,3 +1,4 @@
+import Game.KeyAction;
 
 public class Dungeon {
 	protected Space[][] spaces;
@@ -13,6 +14,11 @@ public class Dungeon {
 	private final int PLAYER_HEALTH = 100;
 	private final int INIT_ITEMS = 15;
 	private final int INIT_MONSTERS = 25;
+	public Player player;
+	
+	public enum KeyAction {
+        RIGHT, LEFT, UP, DOWN
+    };
 	
 	public Dungeon(int playerR, int playerC){
 		spaces = new Space[width][height];
@@ -102,11 +108,27 @@ public class Dungeon {
 				Character thing = ((RoomSpace) spaces[r][c]).getFirstThing();
 				((RoomSpace) spaces[r][c]).remove(thing);
 			}
-			spaces[r][c].add(new Player(PLAYER_ID, PLAYER_HEALTH, r, c));
+			player = new Player(PLAYER_ID, PLAYER_HEALTH, r, c, spaces);
+			spaces[r][c].add(player);
 		}
 		
 			
 	}
+	
+    public void handleEvent(KeyAction e) {
+        if (e == KeyAction.RIGHT) {
+            player.move(Location.EAST);
+        }
+        if (e == KeyAction.LEFT) {
+            player.move(Location.WEST);
+        }
+        if (e == KeyAction.UP) {
+            player.move(Location.NORTH);
+        }
+        if (e == KeyAction.DOWN) {
+            player.move(Location.SOUTH);
+        }
+    }
 	
 	public Space[][] getGrid(){
 		return spaces;

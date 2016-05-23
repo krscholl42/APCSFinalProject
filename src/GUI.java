@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 import processing.core.*;
 
 public class GUI extends PApplet {
@@ -34,6 +36,21 @@ public class GUI extends PApplet {
 
 
 	}
+	
+	 public void keyPressed(KeyEvent e) {
+	        if (e.getKeyCode() == e.VK_UP) dun.handleEvent(Dungeon.KeyAction.UP);
+	        if (e.getKeyCode() == e.VK_DOWN) dun.handleEvent(Dungeon.KeyAction.DOWN);
+	        if (e.getKeyCode() == e.VK_RIGHT) dun.handleEvent(Dungeon.KeyAction.RIGHT);
+	        if (e.getKeyCode() == e.VK_LEFT) dun.handleEvent(Dungeon.KeyAction.LEFT);
+	    }
+
+	    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+	        if (evt.getKeyCode() == evt.VK_UP) dun.handleEvent(Dungeon.KeyAction.UP);
+	        if (evt.getKeyCode() == evt.VK_DOWN) dun.handleEvent(Dungeon.KeyAction.DOWN);
+	        if (evt.getKeyCode() == evt.VK_RIGHT) dun.handleEvent(Dungeon.KeyAction.RIGHT);
+	        if (evt.getKeyCode() == evt.VK_UP) dun.handleEvent(Dungeon.KeyAction.LEFT);
+
+	    }//GEN-LAST:event_formKeyTyped
 
 	@Override
 	public void draw() {
