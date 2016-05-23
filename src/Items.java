@@ -4,8 +4,8 @@
  */
 public class Items extends Character{
 	
-	public Items(int charId, int start, int r, int c){
-		super(charId, start, r, c);
+	public Items(int charId, int start, int r, int c, Space[][] space){
+		super(charId, start, r, c,space);
 	}
 
 	@Override

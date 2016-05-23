@@ -80,7 +80,7 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numItems --;
-				spaces[r][c].add(new Items(ITEM_ID, ITEM_HEALTH,r,c));
+				spaces[r][c].add(new Items(ITEM_ID, ITEM_HEALTH,r,c,spaces));
 			}
 		}
 	}
@@ -91,7 +91,7 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numMons --;
-				spaces[r][c].add(new Monster(MONSTER_ID, MONSTER_HEALTH,r,c));
+				spaces[r][c].add(new Monster(MONSTER_ID, MONSTER_HEALTH,r,c, spaces));
 			}
 		}
 	}
@@ -102,7 +102,7 @@ public class Dungeon {
 				Character thing = ((RoomSpace) spaces[r][c]).getFirstThing();
 				((RoomSpace) spaces[r][c]).remove(thing);
 			}
-			spaces[r][c].add(new Player(PLAYER_ID, PLAYER_HEALTH, r, c));
+			spaces[r][c].add(new Player(PLAYER_ID, PLAYER_HEALTH, r, c, spaces));
 		}
 		
 			
