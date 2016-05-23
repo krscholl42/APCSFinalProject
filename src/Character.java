@@ -20,7 +20,6 @@ public abstract class Character implements Comparable{
 		loc = new Location(r,c);
 	}
 	
-	
 	public int getHealth(){
 		return 0;
 	}

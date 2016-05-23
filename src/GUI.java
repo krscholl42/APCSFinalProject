@@ -40,5 +40,6 @@ public class GUI extends PApplet {
 		background(200);
 		
 		display.drawGrid(dun); // display the game
+		
 	}
 }
