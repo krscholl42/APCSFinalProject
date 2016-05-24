@@ -67,6 +67,10 @@ public class Display {
 			}
 		}
 	}
+	
+	public void drawInfoField(){
+		p.rect(10, 550, 260, 700);
+	}
 
 	/**
 	 * Define a color to be used for a given value in the grid.
