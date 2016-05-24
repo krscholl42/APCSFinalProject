@@ -10,13 +10,15 @@ public abstract class Character implements Comparable{
 	protected final int UP = 0;
 	protected final int DOWN = 2;
 	protected final int RIGHT = 3;
-	protected Space[][] spaces;
+	public Dungeon dungeon;
+	public Space[][] spaces;
 	
-	public Character(int charId,int start, int r, int c, Space[][] space){
+	public Character(int charId,int start, int r, int c, Dungeon d){
 		this.charId = charId;
 		startHealth = start;
 		currentHealth = startHealth;
-		spaces = space;
+		dungeon = d;
+		spaces = d.getGrid();
 		loc = new Location(r,c);
 	}
 	

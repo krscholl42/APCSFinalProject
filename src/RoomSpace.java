@@ -61,13 +61,18 @@ public class RoomSpace extends Space{
 	}
 	
 	public boolean remove(Character thing){
-		for(int i = 0; i < contains.length; i++){
+		boolean there = false;
+		Character[] nextContains = new Character[contains.length];
+		for(int i = 0; i <= index; i++){
+			System.out.println(i);
 			if(contains[i].equals(thing)){
-				contains[i] = null;
-				return true;
+				there = true;
+			}else{
+				nextContains[i] = contains[i];
 			}
 		}
-		return false;
+		 contains = nextContains;
+		return there;
 	}
 	
 	public boolean  isEmpty(){

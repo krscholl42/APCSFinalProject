@@ -4,8 +4,8 @@
  */
 public class Monster extends Character{
 	
-	public Monster(int charId, int start, int r, int c, Space[][] space){
-		super(charId, start, r, c,space);
+	public Monster(int charId, int start, int r, int c, Dungeon d){
+		super(charId, start, r, c,d);
 		
 	}
 

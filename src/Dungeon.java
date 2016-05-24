@@ -86,7 +86,7 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numItems --;
-				spaces[r][c].add(new Items(ITEM_ID, ITEM_HEALTH,r,c,spaces));
+				spaces[r][c].add(new Items(ITEM_ID, ITEM_HEALTH,r,c,this));
 			}
 		}
 	}
@@ -97,8 +97,7 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numMons --;
-				spaces[r][c].add(new Monster(MONSTER_ID, MONSTER_HEALTH,r,c, spaces));
-				System.out.println("MONSTER!");
+				spaces[r][c].add(new Monster(MONSTER_ID, MONSTER_HEALTH,r,c, this));
 			}
 		}
 	}
@@ -110,11 +109,8 @@ public class Dungeon {
 				((RoomSpace) spaces[r][c]).remove(thing);
 			}
 
-			player = new Player(PLAYER_ID, PLAYER_HEALTH, r, c, spaces);
+			player = new Player(PLAYER_ID, PLAYER_HEALTH, r, c, this);
 			spaces[r][c].add(player);
-
-			spaces[r][c].add(new Player(PLAYER_ID, PLAYER_HEALTH, r, c, spaces));
-			System.out.println("PLAYER!");
 
 		}
 		
@@ -122,18 +118,23 @@ public class Dungeon {
 	}
 	
     public void handleEvent(KeyAction e) {
+//    	Location currentLoc = player.getLocation();
+//    	Location nextLoc = currentLoc;
         if (e == KeyAction.RIGHT) {
-            player.move(Location.EAST);
+          player.move(Location.EAST);
+            
         }
         if (e == KeyAction.LEFT) {
-            player.move(Location.WEST);
+           player.move(Location.WEST);
         }
         if (e == KeyAction.UP) {
-            player.move(Location.NORTH);
+           player.move(Location.NORTH);
         }
         if (e == KeyAction.DOWN) {
             player.move(Location.SOUTH);
         }
+//        ((RoomSpace) spaces[currentLoc.getRow()][currentLoc.getCol()]).remove(player);
+//        ((RoomSpace)spaces[nextLoc.getRow()][nextLoc.getCol()]).add(player);
     }
 	
 	public Space[][] getGrid(){
@@ -146,6 +147,47 @@ public class Dungeon {
 	
 	public int getHeight(){
 		return height;
+	}
+	
+	public boolean isOpen(int row, int col){
+		Space next = spaces[row][col];
+		if(next instanceof EmptySpace || next instanceof WallSpace)
+			return false;
+		else if (next instanceof RoomSpace){
+			if(((RoomSpace) next).isSpaceFull())
+				return false;
+			return true;
+		}
+		return false;
+	}
+	
+	void moveElementAt(Location loc, int direction) {
+		if (!isInRoom(loc.getRow(), loc.getCol()))
+			return;
+
+		Location moveTo = Location.locationInDirection(loc, direction);
+
+		if (!isInRoom(moveTo.getRow(), moveTo.getCol()))
+			return;
+
+		int moveFromRow = 0, moveFromCol = 0;
+		spaces[moveFromRow][moveFromCol] = spaces[moveTo.row][moveTo.col];
+		spaces[moveTo.row][moveTo.col] = spaces[loc.row][loc.col]; // move thing
+		spaces[loc.row][loc.col] = spaces[moveFromRow][moveFromCol]; // old square empty
+	}
+	
+	// return true if (row, col) is a valid location in the room
+	public boolean isInRoom(int row, int col) {
+		if (row < 0 || col < 0) {
+			return false;
+		}
+		if (row >= spaces.length) {
+			return false;
+		}
+		if (col >= spaces[0].length) {
+			return false;
+		}
+		return true;
 	}
 
 }
