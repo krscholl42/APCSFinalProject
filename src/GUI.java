@@ -1,23 +1,31 @@
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 import processing.core.*;
 
 public class GUI extends PApplet {
 	int c;
 	Display display;
+	Display textField;
 	Dungeon dun;
+	JTextField jTextField1;
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
  
 		dun = new Dungeon(50, 50);
 		dun.buildDungeon();
+		initComponents();
 		// Create a simulator
 
 		// Create the display
 		// parameters: (10,10) is upper left of display
 		// (620, 530) is the width and height
 		display = new Display(this, 10, 10, 620, 530);
+		textField = new Display(this, 10, 550, 250, 200);
 
 		// Set different grid values to different colors
 		//		display.setColor(1, color(255, 0, 0)); 
@@ -38,6 +46,16 @@ public class GUI extends PApplet {
 
 	}
 	
+	private void initComponents(){
+        JTextField jTextField1 = new javax.swing.JTextField();
+        
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+	}
+	
 	 public void keyPressed(KeyEvent e) {
 	        if (e.getKeyCode() == e.VK_UP) dun.handleEvent(Dungeon.KeyAction.UP);
 	        if (e.getKeyCode() == e.VK_DOWN) dun.handleEvent(Dungeon.KeyAction.DOWN);
@@ -52,6 +70,14 @@ public class GUI extends PApplet {
 	        if (evt.getKeyCode() == evt.VK_UP) dun.handleEvent(Dungeon.KeyAction.LEFT);
 
 	    }//GEN-LAST:event_formKeyTyped
+	    
+	    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+	        if (evt.getKeyChar() == '\n') {
+				String command = jTextField1.getText();
+	            jTextField1.setText("");
+	            //dun.handleCommand(command);
+	        }
+	    }//GEN-LAST:event_jTextField1KeyTyped
 
 	@Override
 	public void draw() {

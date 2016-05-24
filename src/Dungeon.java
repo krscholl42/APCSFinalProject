@@ -118,8 +118,6 @@ public class Dungeon {
 	}
 	
     public void handleEvent(KeyAction e) {
-//    	Location currentLoc = player.getLocation();
-//    	Location nextLoc = currentLoc;
         if (e == KeyAction.RIGHT) {
           player.move(Location.EAST);
             
@@ -133,9 +131,9 @@ public class Dungeon {
         if (e == KeyAction.DOWN) {
             player.move(Location.SOUTH);
         }
-//        ((RoomSpace) spaces[currentLoc.getRow()][currentLoc.getCol()]).remove(player);
-//        ((RoomSpace)spaces[nextLoc.getRow()][nextLoc.getCol()]).add(player);
     }
+    
+    
 	
 	public Space[][] getGrid(){
 		return spaces;
