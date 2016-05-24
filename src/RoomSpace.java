@@ -69,7 +69,15 @@ public class RoomSpace extends Space{
 		}
 		return false;
 	}
-
+	
+	public boolean  isEmpty(){
+		boolean empty = true;
+		for(int i = 0; i< contains.length; i++){
+			if(contains[i] != null)
+				empty = false;
+		}
+		return empty;
+	}
 }
 
 	

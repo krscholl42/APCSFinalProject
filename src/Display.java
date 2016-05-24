@@ -50,8 +50,9 @@ public class Display {
 				if(space == null){
 					pieceColor = this.EMPTY_COLOR;
 				}else{
-				if(space instanceof RoomSpace && space.getIsFull() == true){
-					pieceColor = getColor(((RoomSpace) space).getFirstThing());
+				if(space instanceof RoomSpace && ! ((RoomSpace) space).isEmpty()){
+					Character thing = ((RoomSpace) space).getMVT();
+					pieceColor = getColor(thing.getClass());
 				}else{			
 					Class roomState = space.getClass();
 					

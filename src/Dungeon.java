@@ -1,4 +1,4 @@
-import Game.KeyAction;
+
 
 public class Dungeon {
 	protected Space[][] spaces;
@@ -86,7 +86,7 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numItems --;
-				spaces[r][c].add(new Items(ITEM_ID, ITEM_HEALTH,r,c));
+				spaces[r][c].add(new Items(ITEM_ID, ITEM_HEALTH,r,c,spaces));
 			}
 		}
 	}
@@ -97,7 +97,8 @@ public class Dungeon {
 			int c = (int)(Math.random()*height);
 			if(spaces[r][c] instanceof RoomSpace){
 				numMons --;
-				spaces[r][c].add(new Monster(MONSTER_ID, MONSTER_HEALTH,r,c));
+				spaces[r][c].add(new Monster(MONSTER_ID, MONSTER_HEALTH,r,c, spaces));
+				System.out.println("MONSTER!");
 			}
 		}
 	}
@@ -105,11 +106,16 @@ public class Dungeon {
 	public void placePlayer(int r, int c){
 		if(spaces[r][c] instanceof RoomSpace){
 			if(spaces[r][c].getIsFull()){
-				Character thing = ((RoomSpace) spaces[r][c]).getFirstThing();
+				Character thing = ((RoomSpace) spaces[r][c]).getMVT();
 				((RoomSpace) spaces[r][c]).remove(thing);
 			}
+
 			player = new Player(PLAYER_ID, PLAYER_HEALTH, r, c, spaces);
 			spaces[r][c].add(player);
+
+			spaces[r][c].add(new Player(PLAYER_ID, PLAYER_HEALTH, r, c, spaces));
+			System.out.println("PLAYER!");
+
 		}
 		
 			

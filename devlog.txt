@@ -19,3 +19,8 @@
  -improve/fix display and processing
  -impove/fix most classes to work together better
  -start creating numbers with meaning instead of placeholders (potentially)
+ 
+ Day 3:
+ -worked on Player class
+ -start to integrate key commands with game
+ 

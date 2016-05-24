@@ -40,4 +40,10 @@ public class Location {
         public int getCol(){
         	return col;
         }
+        
+        public Location changeLoc(int r, int c){
+        	row = r;
+        	col = c;
+        	return this;
+        }
 }

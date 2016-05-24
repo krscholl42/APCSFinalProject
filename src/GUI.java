@@ -10,7 +10,7 @@ public class GUI extends PApplet {
 	public void setup() {
 		size(640, 550); // set the size of the screen.
  
-		dun = new Dungeon(75,75);
+		dun = new Dungeon(50, 50);
 		dun.buildDungeon();
 		// Create a simulator
 
@@ -28,8 +28,9 @@ public class GUI extends PApplet {
 		display.setColor(WallSpace.class, color(247, 116, 59));
 		display.setColor(EmptySpace.class, color(0,0,0));
 		display.setColor(Space.class, color(87,123,243));
-		display.setColor(Player.class, color(0,32,0));
-		display.setColor(Items.class, color(0,0,20));
+		display.setColor(Player.class, color(255,0,200));
+		display.setColor(Items.class, color(255,255,245));
+		display.setColor(Monster.class, color(0,255,0));
 
 		display.setNumCols(dun.getWidth());
 		display.setNumRows(dun.getHeight());
@@ -57,5 +58,6 @@ public class GUI extends PApplet {
 		background(200);
 		
 		display.drawGrid(dun); // display the game
+		
 	}
 }
