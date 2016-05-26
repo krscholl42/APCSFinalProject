@@ -14,16 +14,22 @@ public class Dungeon {
 	private final int PLAYER_HEALTH = 100;
 	private final int INIT_ITEMS = 15;
 	private final int INIT_MONSTERS = 25;
+	
+	int ItemCount;
+	int MonsterCount;
+	
 	public Player player;
 	
 	public enum KeyAction {
-        RIGHT, LEFT, UP, DOWN
+        RIGHT, LEFT, UP, DOWN, ITEM, ATTACK
     };
 	
 	public Dungeon(int playerR, int playerC){
 		spaces = new Space[width][height];
 		player_r = playerR;
 		player_c = playerC;
+		ItemCount = INIT_ITEMS;
+		MonsterCount = INIT_MONSTERS;
 	}
 	
 	public void buildDungeon(){
@@ -106,7 +112,7 @@ public class Dungeon {
 		if(spaces[r][c] instanceof RoomSpace){
 			if(spaces[r][c].getIsFull()){
 				Character thing = ((RoomSpace) spaces[r][c]).getMVT();
-				((RoomSpace) spaces[r][c]).remove(thing);
+				((RoomSpace) spaces[r][c]).remove(thing.getCharId());
 			}
 
 			player = new Player(PLAYER_ID, PLAYER_HEALTH, r, c, this);
@@ -119,8 +125,7 @@ public class Dungeon {
 	
     public void handleEvent(KeyAction e) {
         if (e == KeyAction.RIGHT) {
-          player.move(Location.EAST);
-            
+          player.move(Location.EAST);        
         }
         if (e == KeyAction.LEFT) {
            player.move(Location.WEST);
@@ -130,6 +135,21 @@ public class Dungeon {
         }
         if (e == KeyAction.DOWN) {
             player.move(Location.SOUTH);
+        }
+        if (e == KeyAction.ITEM){
+        	if(player.isAdjacent(player.getLocation(), ITEM_ID)){
+        		Location iLoc= player.whereAdjacent(player.getLocation(), ITEM_ID);
+        		if(player.pickUpItem(iLoc))
+        			ItemCount--;
+        	}
+        }
+        if(e == KeyAction.ATTACK){
+        	if(player.isAdjacent(player.getLocation(), MONSTER_ID)){
+        		Location mLoc = player.whereAdjacent(player.getLocation(),MONSTER_ID);
+        		boolean killed = player.attackMonster(mLoc);
+        		if(killed)
+        			MonsterCount--;
+        	}
         }
     }
     
@@ -186,6 +206,14 @@ public class Dungeon {
 			return false;
 		}
 		return true;
+	}
+	
+	public int getItemCount(){
+		return ItemCount;
+	}
+	
+	public int getMonsterCount(){
+		return MonsterCount;
 	}
 
 }

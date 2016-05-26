@@ -3,10 +3,6 @@ import java.awt.TextField;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
-
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.Controller;
@@ -19,10 +15,13 @@ public class GUI extends PApplet {
 	Display display;
 	Display textField;
 	Dungeon dun;
-	JTextField jTextField1;
-	TextField tf;
 	ControlP5 cp5;
-	String[] textfieldNames = {"Health", "Items Left", "Monsters Left", "Total Points Earned", "tf5"};
+	String[] textfieldNames = {"Health", "Items Left", "Monsters Left", "Total Points Earned"};
+	int ItemsCurrent;
+	int ItemsNext;
+	
+	int MonsCurrent;
+	int MonsNext;
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
@@ -30,8 +29,13 @@ public class GUI extends PApplet {
  
 		dun = new Dungeon(50, 50);
 		dun.buildDungeon();
-		initComponents();
 		// Create a simulator
+		
+		ItemsCurrent = dun.getItemCount();
+		ItemsNext = ItemsCurrent;
+		
+		MonsCurrent = dun.getMonsterCount();
+		MonsNext = MonsCurrent;
 
 		// Create the display
 		// parameters: (10,10) is upper left of display
@@ -84,47 +88,22 @@ public class GUI extends PApplet {
 		            );
 		  }
 	}
-	
-	private void initComponents(){
-        JTextField jTextField1 = new javax.swing.JTextField();
-        
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
-            }
-        });
-	}
+
 	
 	 public void keyPressed(KeyEvent e) {
 	        if (e.getKeyCode() == e.VK_UP) dun.handleEvent(Dungeon.KeyAction.UP);
 	        if (e.getKeyCode() == e.VK_DOWN) dun.handleEvent(Dungeon.KeyAction.DOWN);
 	        if (e.getKeyCode() == e.VK_RIGHT) dun.handleEvent(Dungeon.KeyAction.RIGHT);
 	        if (e.getKeyCode() == e.VK_LEFT) dun.handleEvent(Dungeon.KeyAction.LEFT);
+	        if (e.getKeyCode() == e.VK_I) dun.handleEvent(Dungeon.KeyAction.ITEM);
+	        if (e.getKeyCode() == e.VK_A) dun.handleEvent(Dungeon.KeyAction.ATTACK);
 	    }
 
-	    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
-	        if (evt.getKeyCode() == evt.VK_UP) dun.handleEvent(Dungeon.KeyAction.UP);
-	        if (evt.getKeyCode() == evt.VK_DOWN) dun.handleEvent(Dungeon.KeyAction.DOWN);
-	        if (evt.getKeyCode() == evt.VK_RIGHT) dun.handleEvent(Dungeon.KeyAction.RIGHT);
-	        if (evt.getKeyCode() == evt.VK_UP) dun.handleEvent(Dungeon.KeyAction.LEFT);
-
-	    }//GEN-LAST:event_formKeyTyped
-	    
-	    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
-	        if (evt.getKeyChar() == '\n') {
-				String command = jTextField1.getText();
-	            jTextField1.setText("");
-	            //dun.handleCommand(command);
-	        }
-	    }//GEN-LAST:event_jTextField1KeyTyped
-
-	@Override
+	    @Override
 	public void draw() {
 		background(200);
 		count++;
-		if(count == 25){
-			changeText("woot");
-		}
+		
 		display.drawGrid(dun); // display the game
 		
 

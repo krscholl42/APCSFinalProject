@@ -60,12 +60,12 @@ public class RoomSpace extends Space{
 			return false;
 	}
 	
-	public boolean remove(Character thing){
+	public boolean remove(int charId){
 		boolean there = false;
 		Character[] nextContains = new Character[contains.length];
 		for(int i = 0; i <= index; i++){
 			System.out.println(i);
-			if(contains[i].equals(thing)){
+			if(contains[i].getCharId() == charId && there == false){
 				there = true;
 			}else{
 				nextContains[i] = contains[i];
@@ -82,6 +82,14 @@ public class RoomSpace extends Space{
 				empty = false;
 		}
 		return empty;
+	}
+	
+	public boolean contains(int charId){
+		for(int i = 0; i < contains.length; i++){
+			if(contains[i].getCharId() == charId);
+				return true;
+		}
+		return false;
 	}
 }
 
