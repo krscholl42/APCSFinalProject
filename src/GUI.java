@@ -17,11 +17,13 @@ public class GUI extends PApplet {
 	Dungeon dun;
 	ControlP5 cp5;
 	String[] textfieldNames = {"Health", "Items Left", "Monsters Left", "Total Points Earned"};
+	String[] textfieldTexts = {"100", "15", "25", "0"};
 	int ItemsCurrent;
 	int ItemsNext;
 	
 	int MonsCurrent;
 	int MonsNext;
+	int health;
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
@@ -36,7 +38,8 @@ public class GUI extends PApplet {
 		
 		MonsCurrent = dun.getMonsterCount();
 		MonsNext = MonsCurrent;
-
+		health = 100;
+		
 		// Create the display
 		// parameters: (10,10) is upper left of display
 		// (620, 530) is the width and height
@@ -65,14 +68,15 @@ public class GUI extends PApplet {
 
 		  int y = 20;
 		  int spacing = 60;
-		  for(String name: textfieldNames){
-		    cp5.addTextfield(name)
+		  for(int i = 0; i < textfieldNames.length; i++){
+			  String name = textfieldNames[i];
+			  cp5.addTextfield(name)
 		       .setPosition(20,y)
 		       .setSize(100,40)
 		       .setFont(font)
 		       .setFocus(true)
 		       .setColor(color(255,0,255))
-		       .setText("testing")
+		       .setText(textfieldTexts[i])
 		       ;
 		     y += spacing;
 		  }
@@ -103,11 +107,35 @@ public class GUI extends PApplet {
 	public void draw() {
 		background(200);
 		count++;
+		ItemsNext = dun.getItemCount();
+		MonsNext = dun.getMonsterCount();
+		
+		if(ItemsNext != ItemsCurrent){
+			changeCount("ItemCount", ItemsNext);
+			ItemsCurrent = ItemsNext;
+		}
+		if(MonsNext != MonsCurrent){
+			changeCount("MonsterCount", MonsNext);
+			MonsCurrent = MonsNext;
+		}
+		
+		if((count+1) % 105 == 0){
+			health--;
+			changeCount("Health", health);
+		}
+			
 		
 		display.drawGrid(dun); // display the game
 		
 
 	}
+	private void changeCount(String txtName, int nextCount) {
+			Textfield txt = (Textfield) cp5.getController(txtName);
+			String num = Integer.toString(nextCount);
+			txt.setValue(num);
+			
+		}
+
 	public void changeText(String text){
 		Textfield txt = (Textfield) cp5.getController("Health");
 		txt.setValue(text);

@@ -47,6 +47,7 @@ public class Player extends Character{
 				}
 			}
 		}
+		System.out.println("Failed");
 		return new Location(-1,-1); //should theoretically never happen, but if it does, sends an invalid location
 	}
 	
