@@ -9,19 +9,14 @@ public abstract class Space implements Comparable {
 	public Space(int r, int c){
 		loc = new Location(r,c);
 		
-	}
-	
+	}	
 	public boolean getIsFull(){
 		return isFull;
-	}
-	
+	}	
 	public abstract boolean add(Character thing);
 	
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
-
 }

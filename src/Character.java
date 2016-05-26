@@ -54,9 +54,6 @@ public abstract class Character implements Comparable{
 	public int getCharId() {
 		return charId;
 	}
-	
-	public String toString(){
-		return "C";
-	}
+
 
 }

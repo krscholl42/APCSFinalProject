@@ -10,12 +10,6 @@ public class Items extends Character{
 
 	@Override
 	public int compareTo(Object o) {
-		// TODO Auto-generated method stub 
 		return 0;
 	}
-	
-	public String toString(){
-		return "Item";
-	}
-
 }

@@ -59,6 +59,7 @@ public class Player extends Character{
 	
 	public boolean attackMonster(Location monsterLoc){
 		RoomSpace i = (RoomSpace) spaces[monsterLoc.getRow()][monsterLoc.getCol()];
+		System.out.println("RoomRow: " + monsterLoc.getRow() + " RoomCol: " + monsterLoc.getCol());
 		return i.remove(dungeon.MONSTER_ID);
 	}
 
@@ -67,10 +68,4 @@ public class Player extends Character{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	@Override
-	public String toString(){
-		return "Player";
-	}
-
 }

@@ -139,6 +139,7 @@ public class Dungeon {
         if (e == KeyAction.ITEM){
         	if(player.isAdjacent(player.getLocation(), ITEM_ID)){
         		Location iLoc= player.whereAdjacent(player.getLocation(), ITEM_ID);
+        		System.out.println("Row: " + iLoc.getRow() + " Col: " + iLoc.getCol());
         		if(player.pickUpItem(iLoc))
         			ItemCount--;
         	}

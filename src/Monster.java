@@ -8,41 +8,9 @@ public class Monster extends Character{
 		super(charId, start, r, c,d);
 		
 	}
-
-	
-	public void attack(){
-		
-	}
-	
-	public void heal(int health){
-		if(health + currentHealth <= startHealth)
-			currentHealth += health;
-		else
-			currentHealth = startHealth;
-	}
-	
-	public void hurt(int health){
-		if(currentHealth - health > 0)
-			currentHealth-= health;
-		else
-			death();
-	}
-
-	public void death() {
-		
-		
-	}
-
-
 	@Override
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	@Override
-	public String toString(){
-		return "Monster";
-	}
-
 }

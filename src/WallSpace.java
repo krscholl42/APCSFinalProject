@@ -8,8 +8,6 @@ public class WallSpace extends Space {
 
 	@Override
 	public boolean add(Character thing) {
-
 		return false;
 	}
-
 }

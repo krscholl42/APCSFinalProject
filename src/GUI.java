@@ -1,7 +1,5 @@
 import java.awt.FlowLayout;
-import java.awt.TextField;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JOptionPane;
 
@@ -116,7 +114,6 @@ public class GUI extends PApplet {
 	    @Override
 	public void draw() {
 		background(200);
-		count++;
 		ItemsNext = dun.getItemCount();
 		MonsNext = dun.getMonsterCount();
 		
@@ -144,6 +141,7 @@ public class GUI extends PApplet {
 			
 		if(!gameOver){
 			display.drawGrid(dun); // display the game
+			count++;
 		}else if(gameOver == true){
 			textFont(f);
 			fill(0);
