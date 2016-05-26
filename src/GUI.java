@@ -1,20 +1,32 @@
+import java.awt.FlowLayout;
+import java.awt.TextField;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
+import controlP5.ControlEvent;
+import controlP5.ControlP5;
+import controlP5.Controller;
+import controlP5.Textfield;
+import javafx.scene.text.Text;
 import processing.core.*;
 
 public class GUI extends PApplet {
-	int c;
+	int c; int count;
 	Display display;
 	Display textField;
 	Dungeon dun;
 	JTextField jTextField1;
+	TextField tf;
+	ControlP5 cp5;
+	String[] textfieldNames = {"Health", "Items Left", "Monsters Left", "Total Points Earned", "tf5"};
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
+		setLayout(new FlowLayout());
  
 		dun = new Dungeon(50, 50);
 		dun.buildDungeon();
@@ -43,7 +55,34 @@ public class GUI extends PApplet {
 		display.setNumCols(dun.getWidth());
 		display.setNumRows(dun.getHeight());
 
+		PFont font = createFont("arial",20);
 
+		  cp5 = new ControlP5(this);
+
+		  int y = 20;
+		  int spacing = 60;
+		  for(String name: textfieldNames){
+		    cp5.addTextfield(name)
+		       .setPosition(20,y)
+		       .setSize(100,40)
+		       .setFont(font)
+		       .setFocus(true)
+		       .setColor(color(255,0,255))
+		       .setText("testing")
+		       ;
+		     y += spacing;
+		  }
+
+		  textFont(font);
+	}
+	
+	void controlEvent(ControlEvent theEvent) {
+		  if(theEvent.isAssignableFrom(Textfield.class)) {
+		    println("controlEvent: accessing a string from controller '"
+		            +theEvent.getName()+"': "
+		            +theEvent.getStringValue()
+		            );
+		  }
 	}
 	
 	private void initComponents(){
@@ -82,8 +121,16 @@ public class GUI extends PApplet {
 	@Override
 	public void draw() {
 		background(200);
-		
+		count++;
+		if(count == 25){
+			changeText("woot");
+		}
 		display.drawGrid(dun); // display the game
 		
+
+	}
+	public void changeText(String text){
+		Textfield txt = (Textfield) cp5.getController("Health");
+		txt.setValue(text);
 	}
 }

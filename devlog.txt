@@ -17,10 +17,29 @@
  
  TODO:
  -improve/fix display and processing
- -impove/fix most classes to work together better
+ -improve/fix most classes to work together better
  -start creating numbers with meaning instead of placeholders (potentially)
  
  Day 3:
  -worked on Player class
  -start to integrate key commands with game
+ 
+ 
+ Day 4:
+ -Got all Character class to successfully display
+ -Basic movement for Player class works (bug with Item Class)
+ 
+ TODO: 
+ -figure out how to display text boxes
+ -figure out remaining mechanics of game
+ 
+ Day 5 (part 1):
+ -figured out base text boxes
+ 	^using a library called ControlP5 with Processing. Seems to be working well
+ -figured out how to edit values of these text boxes with methods
+ 
+ TODO:
+ -create counters
+ -implement counters with text boxes
+ -assign button values to actions (ie a = attack a monster. i = pick up item)
  
