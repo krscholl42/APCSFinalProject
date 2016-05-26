@@ -137,16 +137,18 @@ public class Dungeon {
             player.move(Location.SOUTH);
         }
         if (e == KeyAction.ITEM){
-        	if(player.isAdjacent(player.getLocation(), ITEM_ID)){
-        		Location iLoc= player.whereAdjacent(player.getLocation(), ITEM_ID);
+        	int[] poss = player.isAdjacent(player.getLocation(), ITEM_ID);
+        	if(!(poss[0] == -1 && poss[1] == -1)){
+        		Location iLoc= new Location(poss[0], poss[1]);
         		System.out.println("Row: " + iLoc.getRow() + " Col: " + iLoc.getCol());
         		if(player.pickUpItem(iLoc))
         			ItemCount--;
         	}
         }
         if(e == KeyAction.ATTACK){
-        	if(player.isAdjacent(player.getLocation(), MONSTER_ID)){
-        		Location mLoc = player.whereAdjacent(player.getLocation(),MONSTER_ID);
+        	int[] poss = player.isAdjacent(player.getLocation(), MONSTER_ID);
+        	if(!(poss[0] == -1 && poss[1] == -1)){
+        		Location mLoc = new Location(poss[0], poss[1]);
         		boolean killed = player.attackMonster(mLoc);
         		if(killed)
         			MonsterCount--;

@@ -19,21 +19,26 @@ public class Player extends Character{
 		return false;
 	}
 	
-	public boolean isAdjacent(Location loc, int charId){
+	public int[] isAdjacent(Location loc, int charId){
+		int[] rowCol = new int[2];
+		rowCol[0] = -1; rowCol[1] = -1;
 		System.out.println(charId);
 		for(int r = -1; r <= 1; r++){
 			for(int c = -1; c <= 1; c++){
-				if(dungeon.isInRoom(loc.getRow()+r, loc.getCol()+c)){
-					Space adj = spaces[loc.getRow()+r][loc.getCol()+c];
+				if(dungeon.isInRoom((loc.getRow()+r), (loc.getCol()+c))){
+					Space adj = spaces[(loc.getRow()+r)][(loc.getCol()+c)];
 					if(adj instanceof RoomSpace){
-						if((((RoomSpace) adj).contains(charId)))
-							return true;
+						if((((RoomSpace) adj).contains(charId))){
+							System.out.println("Row: "+ adj.loc.getRow() + " Col: " + adj.loc.getCol());
+							rowCol[0] = adj.loc.getRow(); rowCol[1] = adj.loc.getCol();
+							return rowCol;
+						}
 					}
 					
 				}
 			}
 		}
-		return false;
+		return rowCol;
 	}
 	public Location whereAdjacent(Location loc, int charId){
 		for(int r = -1; r <= 1; r++){

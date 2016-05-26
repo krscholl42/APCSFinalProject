@@ -118,11 +118,11 @@ public class GUI extends PApplet {
 		MonsNext = dun.getMonsterCount();
 		
 		if(ItemsNext != ItemsCurrent){
-			changeCount("ItemCount", ItemsNext);
+			changeCount(textfieldNames[1], ItemsNext);
 			ItemsCurrent = ItemsNext;
 		}
 		if(MonsNext != MonsCurrent){
-			changeCount("MonsterCount", MonsNext);
+			changeCount(textfieldNames[2], MonsNext);
 			MonsCurrent = MonsNext;
 		}
 		
@@ -166,6 +166,7 @@ public class GUI extends PApplet {
 	private void changeCount(String txtName, int nextCount) {
 			Textfield txt = (Textfield) cp5.getController(txtName);
 			String num = Integer.toString(nextCount);
+			System.out.println(num);
 			txt.setValue(num);
 			
 		}
