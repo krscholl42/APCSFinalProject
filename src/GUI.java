@@ -130,6 +130,9 @@ public class GUI extends PApplet {
 			health--;
 			changeCount("Health", health);
 		}
+		if((count+1) % 15 == 0){
+			monsterAction();
+		}
 		
 		if(health == 0){
 			gameOver = true;
@@ -155,6 +158,11 @@ public class GUI extends PApplet {
 		
 
 	}
+	private void monsterAction() {
+		dun.moveMonsters();
+			
+		}
+
 	private void changeCount(String txtName, int nextCount) {
 			Textfield txt = (Textfield) cp5.getController(txtName);
 			String num = Integer.toString(nextCount);

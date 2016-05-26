@@ -217,4 +217,16 @@ public class Dungeon {
 		return MonsterCount;
 	}
 
+	public void moveMonsters() {
+		for(int r = 0; r < spaces.length; r++){
+			for(int c = 0; c < spaces[0].length; c++){
+				if(spaces[r][c] instanceof RoomSpace){
+					RoomSpace place = (RoomSpace) spaces[r][c];
+					place.moveAMonster();
+				}
+			}
+		}
+		
+	}
+
 }

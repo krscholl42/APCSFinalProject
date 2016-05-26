@@ -84,19 +84,30 @@ public class RoomSpace extends Space{
 		return empty;
 	}
 	
+	public void moveAMonster(){
+		if(contains(2)){
+			for(int i = 0; i < index; i++){
+				if(contains[i].getCharId() == 2){
+					Monster m = (Monster) contains[i];
+					m.randomMove();
+				}
+			}
+		}
+	}
+	
 	public boolean contains(int charId){
 		if(charId == 0)
 			return false;
-		System.out.println("yo " + charId);
-		System.out.println("index:" + index);
+	//	System.out.println("yo " + charId);
+	//	System.out.println("index:" + index);
 		for(int i = 0; i < index; i++){
-			System.out.println("i: " + i + " charId: " + contains[i].getCharId());
+			//System.out.println("i: " + i + " charId: " + contains[i].getCharId());
 			if(contains[i].getCharId() == charId){
 				System.out.println("if");
 				return true;
 			}
 		}
-		System.out.println("nah");
+		//System.out.println("nah");
 		return false;
 	}
 }
