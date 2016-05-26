@@ -22,8 +22,7 @@ public class GUI extends PApplet {
 	int ItemsCurrent;
 	int ItemsNext;
 	
-	int MonsCurrent;
-	int MonsNext;
+	int healthNext;
 	int health;
 	
 	boolean gameOver;
@@ -41,9 +40,7 @@ public class GUI extends PApplet {
 		
 		ItemsCurrent = dun.getItemCount();
 		ItemsNext = ItemsCurrent;
-		
-		MonsCurrent = dun.getMonsterCount();
-		MonsNext = MonsCurrent;
+
 		health = 100;
 		
 		gameOver = false;
@@ -108,22 +105,24 @@ public class GUI extends PApplet {
 	        if (e.getKeyCode() == e.VK_RIGHT) dun.handleEvent(Dungeon.KeyAction.RIGHT);
 	        if (e.getKeyCode() == e.VK_LEFT) dun.handleEvent(Dungeon.KeyAction.LEFT);
 	        if (e.getKeyCode() == e.VK_I) dun.handleEvent(Dungeon.KeyAction.ITEM);
-	        if (e.getKeyCode() == e.VK_A) dun.handleEvent(Dungeon.KeyAction.ATTACK);
+	       // if (e.getKeyCode() == e.VK_A) dun.handleEvent(Dungeon.KeyAction.ATTACK);
 	    }
 
 	    @Override
 	public void draw() {
 		background(200);
 		ItemsNext = dun.getItemCount();
-		MonsNext = dun.getMonsterCount();
+
+		healthNext = dun.player.getHealth();
+		
 		
 		if(ItemsNext != ItemsCurrent){
 			changeCount(textfieldNames[1], ItemsNext);
 			ItemsCurrent = ItemsNext;
 		}
-		if(MonsNext != MonsCurrent){
-			changeCount(textfieldNames[2], MonsNext);
-			MonsCurrent = MonsNext;
+		if(healthNext != health){
+			health = healthNext;
+			changeCount(textfieldNames[0], health);
 		}
 		
 		if((count+1) % 105 == 0){
@@ -137,7 +136,7 @@ public class GUI extends PApplet {
 		if(health == 0){
 			gameOver = true;
 		}
-		if(ItemsCurrent == 0 && MonsCurrent == 0){
+		if(ItemsCurrent == 0){
 			gameOver = true;
 			won = true;
 		}

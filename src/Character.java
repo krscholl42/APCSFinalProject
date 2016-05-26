@@ -23,7 +23,7 @@ public abstract class Character implements Comparable{
 	}
 	
 	public int getHealth(){
-		return 0;
+		return currentHealth;
 	}
 	
 	public Location getLocation(){
@@ -55,5 +55,26 @@ public abstract class Character implements Comparable{
 		return charId;
 	}
 
+	public int[] isAdjacent(Location loc, int charId){
+		int[] rowCol = new int[2];
+		rowCol[0] = -1; rowCol[1] = -1;
+		System.out.println(charId);
+		for(int r = -1; r <= 1; r++){
+			for(int c = -1; c <= 1; c++){
+				if(dungeon.isInRoom((loc.getRow()+r), (loc.getCol()+c))){
+					Space adj = spaces[(loc.getRow()+r)][(loc.getCol()+c)];
+					if(adj instanceof RoomSpace){
+						if((((RoomSpace) adj).contains(charId))){
+							System.out.println("Row: "+ adj.loc.getRow() + " Col: " + adj.loc.getCol());
+							rowCol[0] = adj.loc.getRow(); rowCol[1] = adj.loc.getCol();
+							return rowCol;
+						}
+					}
+					
+				}
+			}
+		}
+		return rowCol;
+	}
 
 }

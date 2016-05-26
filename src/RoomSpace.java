@@ -88,15 +88,17 @@ public class RoomSpace extends Space{
 		return empty;
 	}
 	
-	public void moveAMonster(){
+	public boolean moveAMonster(){
+		boolean moved = false;
 		if(contains(2)){
 			for(int i = 0; i < index; i++){
 				if(contains[i].getCharId() == 2){
 					Monster m = (Monster) contains[i];
-					m.randomMove();
+					moved = m.randomMove();
 				}
 			}
 		}
+		return moved;
 	}
 	
 	public boolean contains(int charId){

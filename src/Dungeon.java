@@ -145,15 +145,15 @@ public class Dungeon {
         			ItemCount--;
         	}
         }
-        if(e == KeyAction.ATTACK){
-        	int[] poss = player.isAdjacent(player.getLocation(), MONSTER_ID);
-        	if(!(poss[0] == -1 && poss[1] == -1)){
-        		Location mLoc = new Location(poss[0], poss[1]);
-        		boolean killed = player.attackMonster(mLoc);
-        		if(killed)
-        			MonsterCount--;
-        	}
-        }
+//        if(e == KeyAction.ATTACK){
+//        	int[] poss = player.isAdjacent(player.getLocation(), MONSTER_ID);
+//        	if(!(poss[0] == -1 && poss[1] == -1)){
+//        		Location mLoc = new Location(poss[0], poss[1]);
+//        		boolean killed = player.attackMonster(mLoc);
+//        		if(killed)
+//        			MonsterCount--;
+//        	}
+//        }
     }
     
     
@@ -224,11 +224,26 @@ public class Dungeon {
 			for(int c = 0; c < spaces[0].length; c++){
 				if(spaces[r][c] instanceof RoomSpace){
 					RoomSpace place = (RoomSpace) spaces[r][c];
-					place.moveAMonster();
+					boolean moved = place.moveAMonster();
+					if(moved == true){
+						if(isMonsAdjPlayer(r, c, place) == true){
+							player.attacked();
+							place.remove(MONSTER_ID);
+						}
+					}
 				}
 			}
-		}
-		
+		}	
 	}
+
+	private boolean isMonsAdjPlayer(int r, int c, RoomSpace place) {
+		Monster m = (Monster) place.getMVT();
+		int[] adj = m.isAdjacent(new Location(r,c), PLAYER_ID);
+		if((adj[0] != -1 && adj[1] != -1))
+			return true;
+		return false;
+	}
+
+
 
 }
