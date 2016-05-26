@@ -3,6 +3,8 @@ import java.awt.TextField;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
+
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.Controller;
@@ -18,16 +20,22 @@ public class GUI extends PApplet {
 	ControlP5 cp5;
 	String[] textfieldNames = {"Health", "Items Left", "Monsters Left", "Total Points Earned"};
 	String[] textfieldTexts = {"100", "15", "25", "0"};
+	PFont f; 
 	int ItemsCurrent;
 	int ItemsNext;
 	
 	int MonsCurrent;
 	int MonsNext;
 	int health;
+	
+	boolean gameOver;
+	boolean won;
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
 		setLayout(new FlowLayout());
+		
+		f = createFont("Georgia", 48, true);
  
 		dun = new Dungeon(50, 50);
 		dun.buildDungeon();
@@ -40,6 +48,8 @@ public class GUI extends PApplet {
 		MonsNext = MonsCurrent;
 		health = 100;
 		
+		gameOver = false;
+		won = false;
 		// Create the display
 		// parameters: (10,10) is upper left of display
 		// (620, 530) is the width and height
@@ -123,9 +133,27 @@ public class GUI extends PApplet {
 			health--;
 			changeCount("Health", health);
 		}
-			
 		
-		display.drawGrid(dun); // display the game
+		if(health == 0){
+			gameOver = true;
+		}
+		if(ItemsCurrent == 0 && MonsCurrent == 0){
+			gameOver = true;
+			won = true;
+		}
+			
+		if(!gameOver){
+			display.drawGrid(dun); // display the game
+		}else if(gameOver == true){
+			textFont(f);
+			fill(0);
+			textAlign(CENTER);
+			if(won == true){
+				text("YOU WON",275, 350);
+			}else{
+				text("You lost...",275, 350);
+			}
+		}
 		
 
 	}

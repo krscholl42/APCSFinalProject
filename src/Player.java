@@ -20,6 +20,7 @@ public class Player extends Character{
 	}
 	
 	public boolean isAdjacent(Location loc, int charId){
+		System.out.println(charId);
 		for(int r = -1; r <= 1; r++){
 			for(int c = -1; c <= 1; c++){
 				if(dungeon.isInRoom(loc.getRow()+r, loc.getCol()+c)){

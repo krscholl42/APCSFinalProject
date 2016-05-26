@@ -85,11 +85,16 @@ public class RoomSpace extends Space{
 	}
 	
 	public boolean contains(int charId){
+		if(charId == 0)
+			return false;
 		System.out.println("yo " + charId);
-		for(int i = 0; i <= index; i++){
+		System.out.println("index:" + index);
+		for(int i = 0; i < index; i++){
 			System.out.println("i: " + i + " charId: " + contains[i].getCharId());
-			if(contains[i].getCharId() == charId);
+			if(contains[i].getCharId() == charId){
+				System.out.println("if");
 				return true;
+			}
 		}
 		System.out.println("nah");
 		return false;
