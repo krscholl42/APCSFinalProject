@@ -2,7 +2,7 @@
  * child of Space that designates places where Characters and Items can be placed. 
  */
 public class RoomSpace extends Space{
-	private Character[] contains;
+	public Character[] contains;
 	private int index;
 	
 	public RoomSpace(int r, int c){
@@ -63,15 +63,19 @@ public class RoomSpace extends Space{
 	public boolean remove(int charId){
 		boolean there = false;
 		Character[] nextContains = new Character[contains.length];
+		int nextIndex = 0;
 		for(int i = 0; i < index; i++){
 			System.out.println(i);
 			if(contains[i].getCharId() == charId && there == false){
 				there = true;
 			}else{
-				nextContains[i] = contains[i];
+				nextContains[nextIndex] = contains[i];
+				nextIndex++;
 			}
 		}
 		 contains = nextContains;
+		 index = nextIndex;
+		 
 		return there;
 	}
 	

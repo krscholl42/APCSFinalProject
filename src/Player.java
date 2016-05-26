@@ -40,22 +40,6 @@ public class Player extends Character{
 		}
 		return rowCol;
 	}
-	public Location whereAdjacent(Location loc, int charId){
-		for(int r = -1; r <= 1; r++){
-			for(int c = -1; c <= 1; c++){
-				if(dungeon.isInRoom(loc.getRow()+r, loc.getCol()+c)){
-					Space adj = spaces[loc.getRow()+r][loc.getCol()+c];
-					if(adj instanceof RoomSpace){
-						if((((RoomSpace) adj).contains(charId)))
-							return new Location(r,c);
-					}
-					
-				}
-			}
-		}
-		System.out.println("Failed");
-		return new Location(-1,-1); //should theoretically never happen, but if it does, sends an invalid location
-	}
 	
 	public boolean pickUpItem(Location itemLoc){
 		RoomSpace i = (RoomSpace) spaces[itemLoc.getRow()][itemLoc.getCol()];
