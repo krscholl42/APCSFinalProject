@@ -140,7 +140,11 @@ public class GUI extends PApplet {
 		if(ItemsCurrent == 0){
 			gameOver = true;
 			won = true;
+			int once = 0;
+			while(once < 1){
 			totalPoints += (int)time*1.5;
+			once++;
+			}
 		}		
 		if(!gameOver){
 			display.drawGrid(dun); // display the game
