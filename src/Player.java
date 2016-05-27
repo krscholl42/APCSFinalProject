@@ -25,18 +25,7 @@ public class Player extends Character{
 	}
 	
 	public void attacked(){
+		System.out.println("Attacked");
 		currentHealth-= 5;
-	}
-	
-//	public boolean attackMonster(Location monsterLoc){
-//		RoomSpace i = (RoomSpace) spaces[monsterLoc.getRow()][monsterLoc.getCol()];
-//		System.out.println("RoomRow: " + monsterLoc.getRow() + " RoomCol: " + monsterLoc.getCol());
-//		return i.remove(dungeon.MONSTER_ID);
-//	}
-
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

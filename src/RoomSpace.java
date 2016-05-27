@@ -4,6 +4,8 @@
 public class RoomSpace extends Space{
 	public Character[] contains;
 	private int index;
+	private final int MONSTER_ID = 2;
+	private final int PLAYER_ID = 0;
 	
 	public RoomSpace(int r, int c){
 		super(r,c);
@@ -13,19 +15,9 @@ public class RoomSpace extends Space{
 	}
 	
 	public boolean isSpaceFull(){
-		// checks to see if there is one player, one monster, or two items in the space. If yes, returns true. Else, returns false
-		int itemCount = 0;
-		isFull = false;
-		for(int i = 0; i < contains.length; i++){
-			if(contains[i] instanceof Monster || contains[i] instanceof Player)
-				isFull = true;
-			else if(contains[i] instanceof Items)
-				itemCount++;
-		}
-		if(itemCount >= 2)
-			isFull = true;
-	
-		return isFull;
+		if(index > 0)
+			return true;
+		return false;
 	}
 	
 	public Character getFirstThing(){
@@ -65,7 +57,6 @@ public class RoomSpace extends Space{
 		Character[] nextContains = new Character[contains.length];
 		int nextIndex = 0;
 		for(int i = 0; i < index; i++){
-			System.out.println(i);
 			if(contains[i].getCharId() == charId && there == false){
 				there = true;
 			}else{
@@ -88,11 +79,11 @@ public class RoomSpace extends Space{
 		return empty;
 	}
 	
-	public boolean moveAMonster(){
-		boolean moved = false;
-		if(contains(2)){
+	public int moveAMonster(){
+		int moved = -1;
+		if(contains(2, 0)){
 			for(int i = 0; i < index; i++){
-				if(contains[i].getCharId() == 2){
+				if(contains[i].getCharId() == MONSTER_ID){
 					Monster m = (Monster) contains[i];
 					moved = m.randomMove();
 				}
@@ -101,8 +92,8 @@ public class RoomSpace extends Space{
 		return moved;
 	}
 	
-	public boolean contains(int charId){
-		if(charId == 0)
+	public boolean contains(int charId, int origId){
+		if(charId == origId)
 			return false;
 		for(int i = 0; i < index; i++){
 			if(contains[i].getCharId() == charId){

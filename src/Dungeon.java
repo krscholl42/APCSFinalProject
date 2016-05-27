@@ -14,6 +14,10 @@ public class Dungeon {
 	private final int PLAYER_HEALTH = 100;
 	private final int INIT_ITEMS = 15;
 	private final int INIT_MONSTERS = 25;
+	protected int[][] dirRowCol = new int[][] {{-1,0}, {-1,1}, {0,1}, {1,1}, {1,0}, {1,-1}, {0,-1}, {-1,-1}};
+	protected String[] directions = new String[] {"N", "NW", "W", "SW", "S", "SE", "E", "NE"};
+	private final int ROW = 0;
+	private final int COL = 1;
 	
 	int ItemCount;
 	int MonsterCount;
@@ -140,20 +144,10 @@ public class Dungeon {
         	int[] poss = player.isAdjacent(player.getLocation(), ITEM_ID);
         	if(!(poss[0] == -1 && poss[1] == -1)){
         		Location iLoc= new Location(poss[0], poss[1]);
-        		System.out.println("Row: " + iLoc.getRow() + " Col: " + iLoc.getCol());
         		if(player.pickUpItem(iLoc))
         			ItemCount--;
         	}
         }
-//        if(e == KeyAction.ATTACK){
-//        	int[] poss = player.isAdjacent(player.getLocation(), MONSTER_ID);
-//        	if(!(poss[0] == -1 && poss[1] == -1)){
-//        		Location mLoc = new Location(poss[0], poss[1]);
-//        		boolean killed = player.attackMonster(mLoc);
-//        		if(killed)
-//        			MonsterCount--;
-//        	}
-//        }
     }
     
     
@@ -224,9 +218,9 @@ public class Dungeon {
 			for(int c = 0; c < spaces[0].length; c++){
 				if(spaces[r][c] instanceof RoomSpace){
 					RoomSpace place = (RoomSpace) spaces[r][c];
-					boolean moved = place.moveAMonster();
-					if(moved == true){
-						if(isMonsAdjPlayer(r, c, place) == true){
+					int moved = place.moveAMonster();
+					if(moved != -1){
+						if(isMonsAdjPlayer(r+dirRowCol[moved][ROW], c+dirRowCol[moved][COL], place) == true){
 							player.attacked();
 							place.remove(MONSTER_ID);
 						}
@@ -237,9 +231,9 @@ public class Dungeon {
 	}
 
 	private boolean isMonsAdjPlayer(int r, int c, RoomSpace place) {
-		Monster m = (Monster) place.getMVT();
+		Monster m = (Monster) place.getFirstThing();
 		int[] adj = m.isAdjacent(new Location(r,c), PLAYER_ID);
-		if((adj[0] != -1 && adj[1] != -1))
+		if(!(adj[0] == -1 || adj[1] == -1))
 			return true;
 		return false;
 	}

@@ -8,12 +8,7 @@ public class Monster extends Character{
 		super(charId, start, r, c,d);
 		
 	}
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public boolean randomMove() {
+	public int randomMove() {
 		int direction = (int)(Math.random()*9);
 		Location moveTo = Location.locationInDirection(loc, direction);
 
@@ -21,10 +16,10 @@ public class Monster extends Character{
 			dungeon.moveElementAt(loc, direction);
 
 			loc = moveTo; // update own location
-			return true;
+			return direction;
 		}
 
-		return false;
+		return -1; //if move failed
 		
 	}
 }

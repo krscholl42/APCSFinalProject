@@ -16,22 +16,22 @@ public class GUI extends PApplet {
 	Display textField;
 	Dungeon dun;
 	ControlP5 cp5;
-	String[] textfieldNames = {"Health", "Items Left", "Monsters Left", "Total Points Earned"};
-	String[] textfieldTexts = {"100", "15", "25", "0"};
+	String[] textfieldNames = {"Health", "Items Left", "Monsters Left", "Total Points Earned", "Time Left"};
+	String[] textfieldTexts = {"100", "15", "25", "0", "150"};
 	PFont f; 
 	int ItemsCurrent;
 	int ItemsNext;
-	
+	int totalPoints;
 	int healthNext;
 	int health;
+	int time;
 	
 	boolean gameOver;
 	boolean won;
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
-		setLayout(new FlowLayout());
-		
+		setLayout(new FlowLayout());		
 		f = createFont("Georgia", 48, true);
  
 		dun = new Dungeon(50, 50);
@@ -40,8 +40,9 @@ public class GUI extends PApplet {
 		
 		ItemsCurrent = dun.getItemCount();
 		ItemsNext = ItemsCurrent;
-
+		totalPoints = 0;
 		health = 100;
+		time = 150;
 		
 		gameOver = false;
 		won = false;
@@ -51,11 +52,6 @@ public class GUI extends PApplet {
 		display = new Display(this, 10, 10, 620, 530);
 		textField = new Display(this, 10, 550, 250, 200);
 
-		// Set different grid values to different colors
-		//		display.setColor(1, color(255, 0, 0)); 
-		//		display.setColor(2, color(0, 255, 0));
-
-		// You can use classes instead, for example:
 		display.setColor(RoomSpace.class, color(0, 0, 255));
 		display.setColor(WallSpace.class, color(247, 116, 59));
 		display.setColor(EmptySpace.class, color(0,0,0));
@@ -105,40 +101,44 @@ public class GUI extends PApplet {
 	        if (e.getKeyCode() == e.VK_RIGHT) dun.handleEvent(Dungeon.KeyAction.RIGHT);
 	        if (e.getKeyCode() == e.VK_LEFT) dun.handleEvent(Dungeon.KeyAction.LEFT);
 	        if (e.getKeyCode() == e.VK_I) dun.handleEvent(Dungeon.KeyAction.ITEM);
-	       // if (e.getKeyCode() == e.VK_A) dun.handleEvent(Dungeon.KeyAction.ATTACK);
 	    }
 
 	    @Override
 	public void draw() {
 		background(200);
 		ItemsNext = dun.getItemCount();
-
 		healthNext = dun.player.getHealth();
-		
 		
 		if(ItemsNext != ItemsCurrent){
 			changeCount(textfieldNames[1], ItemsNext);
 			ItemsCurrent = ItemsNext;
+			if(totalPoints == 0)
+				totalPoints = 20;
+			totalPoints = (int) (totalPoints*1.2);
+			changeCount(textfieldNames[3], totalPoints);
 		}
 		if(healthNext != health){
 			health = healthNext;
 			changeCount(textfieldNames[0], health);
+			totalPoints -= 20;
+			changeCount(textfieldNames[3], totalPoints);
 		}
 		
-		if((count+1) % 105 == 0){
-			health--;
-			changeCount("Health", health);
-		}
 		if((count+1) % 15 == 0){
 			monsterAction();
 		}
+		if((count+1) % 105 == 0){
+			time--;
+			changeCount(textfieldNames[4], time);
+		}
 		
-		if(health == 0){
+		if(health == 0 || time == 0){
 			gameOver = true;
 		}
 		if(ItemsCurrent == 0){
 			gameOver = true;
 			won = true;
+			totalPoints += (int)time*1.5;
 		}
 			
 		if(!gameOver){
@@ -149,25 +149,22 @@ public class GUI extends PApplet {
 			fill(0);
 			textAlign(CENTER);
 			if(won == true){
-				text("YOU WON",275, 350);
+				text("YOU WON!!! \n You earned a total of " + totalPoints,275, 350);
 			}else{
-				text("You lost...",275, 350);
+				text("You lost...\n You earned a total of " + totalPoints,275, 350);
 			}
 		}
 		
 
 	}
 	private void monsterAction() {
-		dun.moveMonsters();
-			
+		dun.moveMonsters();		
 		}
 
 	private void changeCount(String txtName, int nextCount) {
 			Textfield txt = (Textfield) cp5.getController(txtName);
 			String num = Integer.toString(nextCount);
-			System.out.println(num);
-			txt.setValue(num);
-			
+			txt.setValue(num);		
 		}
 
 	public void changeText(String text){

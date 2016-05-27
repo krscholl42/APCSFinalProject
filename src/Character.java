@@ -1,7 +1,7 @@
 /*
  * parent class for all 'living' objects in game (ie: Player, Monsters)
  */
-public abstract class Character implements Comparable{
+public abstract class Character{
 	protected final int startHealth;
 	protected int currentHealth;
 	protected final int charId;
@@ -43,12 +43,6 @@ public abstract class Character implements Comparable{
 		}
 		return false;
 	}
-	
-	public int compareTo(Character o) {
-		if(charId == o.getCharId())
-			return 1;
-		return 0;
-	}
 
 
 	public int getCharId() {
@@ -58,14 +52,12 @@ public abstract class Character implements Comparable{
 	public int[] isAdjacent(Location loc, int charId){
 		int[] rowCol = new int[2];
 		rowCol[0] = -1; rowCol[1] = -1;
-		System.out.println(charId);
 		for(int r = -1; r <= 1; r++){
 			for(int c = -1; c <= 1; c++){
 				if(dungeon.isInRoom((loc.getRow()+r), (loc.getCol()+c))){
 					Space adj = spaces[(loc.getRow()+r)][(loc.getCol()+c)];
 					if(adj instanceof RoomSpace){
-						if((((RoomSpace) adj).contains(charId))){
-							System.out.println("Row: "+ adj.loc.getRow() + " Col: " + adj.loc.getCol());
+						if((((RoomSpace) adj).contains(charId, getCharId()))){
 							rowCol[0] = adj.loc.getRow(); rowCol[1] = adj.loc.getCol();
 							return rowCol;
 						}
