@@ -33,7 +33,7 @@
  -figure out how to display text boxes
  -figure out remaining mechanics of game
  
- Day 5 (part 1):
+ Day 5:
  -figured out base text boxes
  	^using a library called ControlP5 with Processing. Seems to be working well
  -figured out how to edit values of these text boxes with methods
@@ -42,4 +42,14 @@
  -create counters
  -implement counters with text boxes
  -assign button values to actions (ie a = attack a monster. i = pick up item)
+ 
+ Day 6:
+ -successfully update textboxes
+ -monster objects can move and hurt the player object
+ -sucessfull interactions between player and items class
+ -End game screens
+ -final touches/polishing
+ 
+ TODO:
+ none 
  
