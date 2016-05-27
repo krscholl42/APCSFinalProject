@@ -113,7 +113,9 @@ public class GUI extends PApplet {
 			changeCount(textfieldNames[1], ItemsNext);
 			ItemsCurrent = ItemsNext;
 			if(totalPoints == 0)
-				totalPoints = 20;
+				totalPoints += 20;
+			if(totalPoints <= 0)
+				totalPoints = 0;
 			totalPoints = (int) (totalPoints*1.2);
 			changeCount(textfieldNames[3], totalPoints);
 		}
