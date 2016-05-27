@@ -139,8 +139,7 @@ public class GUI extends PApplet {
 			gameOver = true;
 			won = true;
 			totalPoints += (int)time*1.5;
-		}
-			
+		}		
 		if(!gameOver){
 			display.drawGrid(dun); // display the game
 			count++;

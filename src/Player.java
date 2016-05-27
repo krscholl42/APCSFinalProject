@@ -15,7 +15,6 @@ public class Player extends Character{
 			loc = moveTo; // update own location
 			return true;
 		}
-
 		return false;
 	}
 

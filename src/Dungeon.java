@@ -118,13 +118,9 @@ public class Dungeon {
 				Character thing = ((RoomSpace) spaces[r][c]).getMVT();
 				((RoomSpace) spaces[r][c]).remove(thing.getCharId());
 			}
-
 			player = new Player(PLAYER_ID, PLAYER_HEALTH, r, c, this);
 			spaces[r][c].add(player);
-
-		}
-		
-			
+		}		
 	}
 	
     public void handleEvent(KeyAction e) {
@@ -237,7 +233,4 @@ public class Dungeon {
 			return true;
 		return false;
 	}
-
-
-
 }

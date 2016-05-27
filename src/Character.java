@@ -68,5 +68,4 @@ public abstract class Character{
 		}
 		return rowCol;
 	}
-
 }
