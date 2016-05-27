@@ -38,8 +38,7 @@ public class RoomSpace extends Space{
 		}
 		if(monster == true)
 			return contains[index];
-		return contains[0];
-		
+		return contains[0];	
 	}
 	
 	public boolean add(Character thing){

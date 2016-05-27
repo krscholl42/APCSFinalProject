@@ -24,7 +24,6 @@ public class Player extends Character{
 	}
 	
 	public void attacked(){
-		System.out.println("Attacked");
 		currentHealth-= 5;
 	}
 }

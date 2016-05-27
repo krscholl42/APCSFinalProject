@@ -67,10 +67,6 @@ public class Display {
 			}
 		}
 	}
-	
-	public void drawInfoField(){
-		p.rect(10, 550, 260, 700);
-	}
 
 	/**
 	 * Define a color to be used for a given value in the grid.
@@ -85,31 +81,6 @@ public class Display {
 	}
 
 	/**
-	 * Define an Image to be used for a given value in the grid.
-	 * 
-	 * @param pieceType
-	 *          The type of piece in the grid.
-	 * @param img
-	 *          The image to be used for the given type of piece.
-	 */
-	public void setImage(Object pieceType, PImage img) {
-		images.put(pieceType, img);
-	}
-
-	/**
-	 * Define a color to be used for a given value in the grid.
-	 * 
-	 * @param pieceType
-	 *          The type of piece in the grid.
-	 * @param filename
-	 *          The file path to the image to be used for the given type of piece.
-	 */
-	public void setImage(Object pieceType, String filename) {
-		PImage img = p.loadImage(filename);
-		setImage(pieceType, img);
-	}
-
-	/**
 	 * @return The color to be used for a given class of animal.
 	 */
 	private Integer getColor(Object pieceType) {
@@ -119,11 +90,6 @@ public class Display {
 		} else {
 			return col;
 		}
-	}
-
-	private PImage getImage(Object pieceType) {
-		PImage img = images.get(pieceType);
-		return img;
 	}
 
 	// return the y pixel value of the upper-left corner of location l
