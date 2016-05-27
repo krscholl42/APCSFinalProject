@@ -140,11 +140,6 @@ public class GUI extends PApplet {
 		if(ItemsCurrent == 0){
 			gameOver = true;
 			won = true;
-			int once = 0;
-			while(once < 1){
-			totalPoints += (int)time*1.5;
-			once++;
-			}
 		}		
 		if(!gameOver){
 			display.drawGrid(dun); // display the game
@@ -154,9 +149,9 @@ public class GUI extends PApplet {
 			fill(0);
 			textAlign(CENTER);
 			if(won == true){
-				text("YOU WON!!! \n You earned a total of " + totalPoints,275, 350);
+				text("YOU WON!!! \n Your final score is " + (totalPoints+time),275, 350);
 			}else{
-				text("You lost...\n You earned a total of " + totalPoints,275, 350);
+				text("You lost...\n Your final score is " + (totalPoints+time),275, 350);
 			}
 		}
 		
