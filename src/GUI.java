@@ -129,7 +129,7 @@ public class GUI extends PApplet {
 		if((count+1) % 15 == 0){
 			monsterAction();
 		}
-		if((count+1) % 105 == 0){
+		if((count+1) % 25 == 0){
 			time--;
 			changeCount(textfieldNames[4], time);
 		}
